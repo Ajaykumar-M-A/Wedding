@@ -1,0 +1,542 @@
+/* Shared template base styles */
+.template-wrap {
+  width: 100%;
+  max-width: 620px;
+  min-height: 900px;
+  margin: 0 auto;
+  font-family: 'Cormorant Garamond', serif;
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Light / Dark Modes */
+.template-wrap.theme-light {
+  background: #fffbf7;
+  color: #2b2222;
+}
+.template-wrap.theme-dark {
+  background: #0f1021;
+  color: #f7f6f0;
+}
+
+/* Top Banner */
+.tmpl-banner {
+  position: relative;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 48px 24px;
+  /* Fallback background-size for when inline backgroundImage is used */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+/* Overlay for gradient banners (light) */
+.tmpl-banner-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.25) 100%);
+  pointer-events: none;
+}
+.theme-light .tmpl-banner-overlay {
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.1) 100%);
+}
+
+/* Overlay when a real photo is used — darken so text is always readable */
+.tmpl-banner-has-photo .tmpl-banner-overlay,
+.tmpl-overlay-photo {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.38) 0%,
+    rgba(0, 0, 0, 0.52) 50%,
+    rgba(0, 0, 0, 0.62) 100%
+  ) !important;
+}
+
+.tmpl-corner {
+  position: absolute;
+  font-size: 1.8rem;
+  opacity: 0.65;
+  user-select: none;
+  z-index: 2;
+  transition: transform 0.3s ease;
+  /* Ensure corners are visible over photo overlay */
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+.tmpl-tl { top: 16px; left: 16px; }
+.tmpl-tr { top: 16px; right: 16px; }
+.tmpl-bl { bottom: 16px; left: 16px; }
+.tmpl-br { bottom: 16px; right: 16px; }
+
+.tmpl-banner-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  max-width: 520px;
+  width: 100%;
+  padding: 0 8px;
+}
+.tmpl-emblem {
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  animation: floatEmblem 3s ease-in-out infinite alternate;
+}
+@keyframes floatEmblem {
+  from { transform: translateY(0); }
+  to { transform: translateY(-6px); }
+}
+
+.tmpl-subtitle {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+.tmpl-names {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+}
+.tmpl-ampersand {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 2.8rem;
+}
+.tmpl-invite-phrase {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  opacity: 0.85;
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Portrait Photos */
+.tmpl-portraits-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 32px 20px;
+}
+.tmpl-portrait-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.tmpl-portrait-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--tmpl-primary);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+}
+.tmpl-portrait-circle:hover {
+  transform: scale(1.05);
+}
+.tmpl-portrait-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.tmpl-portrait-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-top: 10px;
+}
+.tmpl-portrait-role {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.65;
+}
+.tmpl-portrait-heart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulseHeart 2s infinite ease-in-out;
+}
+@keyframes pulseHeart {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* Couple photo */
+.tmpl-couple-photo-box {
+  padding: 8px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tmpl-couple-frame {
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 4px solid var(--tmpl-primary);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  /* Ensure the frame is a block-level container so img fills it */
+  display: block;
+  line-height: 0;
+}
+.tmpl-couple-frame img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+/* Sections */
+.tmpl-section {
+  padding: 36px 32px;
+  text-align: center;
+  position: relative;
+}
+.tmpl-divider {
+  font-size: 1.25rem;
+  margin-bottom: 12px;
+  letter-spacing: 0.15em;
+  opacity: 0.85;
+}
+.tmpl-section-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  opacity: 0.65;
+}
+
+/* Date */
+.tmpl-date-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+.tmpl-time-text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  opacity: 0.9;
+  margin-bottom: 16px;
+}
+.tmpl-cal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 30px;
+  border: 1px solid currentColor;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+.tmpl-cal-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Venue */
+.tmpl-venue-card {
+  /* Ensure text is always legible — inherit from theme-light/theme-dark */
+  color: inherit;
+}
+.tmpl-venue-icon {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+.tmpl-venue-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  /* Never invisible — color set via inline style but fallback below */
+  color: var(--tmpl-primary);
+}
+.tmpl-venue-address {
+  font-size: 1.05rem;
+  font-style: italic;
+  opacity: 0.85;
+  max-width: 440px;
+  margin: 0 auto 20px;
+  line-height: 1.6;
+  /* Inherits from .theme-light / .theme-dark */
+  color: inherit;
+}
+.tmpl-events-grid {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+.tmpl-event-item {
+  padding: 14px 24px;
+  border-radius: 12px;
+  border: 1px solid var(--tmpl-primary, #c9a96e);
+  min-width: 140px;
+  /* Visible on both light and dark by using opacity-aware inline bg */
+}
+.tmpl-event-label {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  margin-bottom: 6px;
+  opacity: 0.75;
+  color: inherit;
+}
+.tmpl-event-time {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--tmpl-primary);
+}
+.tmpl-map-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff !important;
+  padding: 11px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+  margin-top: 4px;
+}
+.tmpl-map-btn:hover {
+  filter: brightness(1.12);
+  transform: translateY(-2px);
+  color: #ffffff !important;
+}
+
+/* Message */
+.tmpl-quote-mark {
+  font-size: 3.5rem;
+  line-height: 0.8;
+  opacity: 0.35;
+  font-family: 'Playfair Display', serif;
+}
+.tmpl-message-body {
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  max-width: 460px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+/* Hashtag */
+.tmpl-hashtag-wrap {
+  text-align: center;
+  padding: 16px 20px 24px;
+}
+.tmpl-hashtag-pill {
+  display: inline-block;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.45rem;
+  padding: 8px 26px;
+  border-radius: 30px;
+  border: 1.5px dashed var(--tmpl-primary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Footer */
+.tmpl-footer {
+  padding: 36px 24px;
+  text-align: center;
+}
+.tmpl-footer-emblem {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+.tmpl-footer-text {
+  font-style: italic;
+  font-size: 1.05rem;
+  opacity: 0.85;
+}
+.tmpl-footer-sub {
+  font-size: 0.78rem;
+  opacity: 0.5;
+  letter-spacing: 0.12em;
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
+/* ================= THEME SPECIFIC STYLES ================= */
+
+/* 1. Floral Romance */
+.floral-romance {
+  background: #fff8f8;
+  color: #382424;
+}
+
+/* 2. Royal Gold */
+.royal-gold {
+  background: radial-gradient(circle at top, #141738 0%, #080918 100%);
+  color: #f7edd8;
+  border: 2px solid #c9a96e44;
+}
+
+/* 3. Rustic Boho */
+.rustic-boho {
+  background: #faf4ec;
+  color: #4a3424;
+  border: 3px double #c4714a66;
+}
+
+/* 4. Modern Minimal */
+.modern-minimal {
+  background: #ffffff;
+  color: #111111;
+  font-family: 'Inter', sans-serif;
+  border: 1px solid #e5e5e5;
+}
+
+/* 5. Garden Bloom */
+.garden-bloom {
+  background: #f4f8f4;
+  color: #27392a;
+}
+
+/* 6. Vintage Lace */
+.vintage-lace {
+  background: #fcf9f2;
+  color: #423528;
+  border: 4px solid #8b735533;
+}
+
+/* 7. South Indian Traditional */
+.south-indian {
+  background: radial-gradient(circle at top, #50030a 0%, #290005 100%);
+  color: #fff4d9;
+  border: 2px solid #d4af3766;
+}
+
+/* 8. North Indian Vibrant */
+.north-indian {
+  background: linear-gradient(160deg, #780231 0%, #3e0018 100%);
+  color: #fff6e0;
+  border: 2px solid #ffcc0066;
+}
+
+/* 9. Celestial Starry */
+.celestial-starry {
+  background: radial-gradient(circle at top, #0d1b4b 0%, #030718 100%);
+  color: #edf2f7;
+  border: 1px solid #7c3aed44;
+}
+
+/* 10. Beach Sunset */
+.beach-sunset {
+  background: linear-gradient(180deg, #fff3ee 0%, #e8f9f8 100%);
+  color: #223c3b;
+}
+
+/* 11. Art Deco Glam */
+.art-deco {
+  background: #141414;
+  color: #f7edd2;
+  border: 2px solid #e5c15866;
+}
+
+/* 12. Pastel Dreamy */
+.pastel-dreamy {
+  background: linear-gradient(135deg, #fdf6ff 0%, #f0fdf9 100%);
+  color: #3b284e;
+}
+
+/* 13. Black Tie */
+.black-tie {
+  background: #111111;
+  color: #f5f5f5;
+  border: 1px solid #333333;
+}
+
+/* 14. Watercolor Whimsy */
+.watercolor-whimsy {
+  background: linear-gradient(135deg, #fff1f8 0%, #f0f7ff 100%);
+  color: #293444;
+}
+
+/* 15. Cherry Blossom */
+.cherry-blossom {
+  background: #fff7f9;
+  color: #47262d;
+}
+
+/* 16. Emerald Forest */
+.emerald-forest {
+  background: radial-gradient(circle at top, #043d2f 0%, #011d16 100%);
+  color: #f1f8f4;
+  border: 2px solid #05966944;
+}
+
+/* 17. Moroccan Luxe */
+.moroccan-luxe {
+  background: radial-gradient(circle at top, #152c6e 0%, #091333 100%);
+  color: #fef3c7;
+  border: 2px solid #fbbf2455;
+}
+
+/* 18. Red & Gold Festive */
+.red-gold-festive {
+  background: radial-gradient(circle at top, #730f14 0%, #360507 100%);
+  color: #fef08a;
+  border: 2px solid #f59e0b66;
+}
+
+/* 19. Purple Royale */
+.purple-royale {
+  background: radial-gradient(circle at top, #360a59 0%, #150226 100%);
+  color: #f5f3ff;
+  border: 2px solid #c084fc55;
+}
+
+/* 20. Ivory Pearl */
+.ivory-pearl {
+  background: #fefdf9;
+  color: #333333;
+  border: 1px solid #e7e5e4;
+}
+
+/* 21. Teal Breeze */
+.teal-breeze {
+  background: linear-gradient(180deg, #f0fdfa 0%, #ccfbf1 100%);
+  color: #134e4a;
+}
+
+/* 22. Burgundy Blossom */
+.burgundy-blossom {
+  background: radial-gradient(circle at top, #480614 0%, #200208 100%);
+  color: #ffe4e6;
+  border: 2px solid #fb718544;
+}

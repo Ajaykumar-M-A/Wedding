@@ -1,0 +1,184 @@
+.home { overflow-x: hidden; }
+
+/* Hero */
+.hero {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 0;
+}
+
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 15% 25%, rgba(201,169,110,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 15%, rgba(201,169,110,0.3) 0%, transparent 100%),
+    radial-gradient(2px 2px at 45% 75%, rgba(232,180,184,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 75% 55%, rgba(201,169,110,0.25) 0%, transparent 100%),
+    radial-gradient(2px 2px at 25% 65%, rgba(201,169,110,0.2) 0%, transparent 100%);
+}
+
+.hero-content {
+  max-width: 620px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-badge {
+  display: inline-flex;
+  margin-bottom: 24px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.2rem);
+  margin-bottom: 20px;
+  line-height: 1.1;
+}
+
+.hero-desc {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 36px;
+  max-width: 540px;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero-stat-num { font-size: 1.5rem; font-weight: 700; font-family: 'Playfair Display', serif; }
+.hero-stat-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* Floating preview cards */
+.hero-previews {
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 360px;
+  opacity: 0.85;
+}
+
+.preview-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.preview-card {
+  border-radius: var(--radius-md);
+  padding: 24px 16px;
+  text-align: center;
+  aspect-ratio: 3/4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: var(--shadow-card);
+}
+
+.preview-emoji { font-size: 2rem; }
+.preview-name { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; color: rgba(255,255,255,0.9); font-weight: 600; }
+
+/* Sections */
+.section { padding: 100px 0; }
+.section-dark { background: rgba(255,255,255,0.02); }
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  margin-bottom: 12px;
+}
+
+.section-desc { font-size: 1rem; }
+
+/* Features */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 40px 32px;
+}
+
+.feature-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.feature-title { font-size: 1.1rem; margin-bottom: 10px; font-family: 'Inter', sans-serif; font-weight: 600; }
+.feature-desc { font-size: 0.9rem; line-height: 1.6; }
+
+/* Steps */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+}
+
+.step-item { text-align: center; }
+.step-num { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; opacity: 0.7; }
+.step-title { font-size: 1.1rem; font-weight: 600; margin: 8px 0; }
+.step-desc { font-size: 0.9rem; line-height: 1.6; }
+
+/* CTA */
+.cta-section { padding: 80px 0; }
+.cta-card {
+  border-radius: var(--radius-xl);
+  padding: 64px 48px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.cta-title { font-size: clamp(1.6rem, 3.5vw, 2.4rem); max-width: 600px; }
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 0;
+}
+
+@media (max-width: 900px) {
+  .hero-previews { display: none; }
+  .hero { min-height: auto; padding: 60px 0; }
+}
+
+@media (max-width: 768px) {
+  .hero-ctas { flex-direction: column; align-items: flex-start; }
+  .hero-stats { gap: 24px; }
+  .features-grid, .steps-grid { grid-template-columns: 1fr; }
+  .cta-card { padding: 40px 24px; }
+}

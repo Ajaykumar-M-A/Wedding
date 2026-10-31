@@ -1,0 +1,23 @@
+version: "3.9"
+
+# Production overrides — use with:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+
+services:
+  mongo:
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+
+  backend:
+    environment:
+      MONGODB_URL: mongodb://${MONGO_USER}:${MONGO_PASSWORD}@mongo:27017
+    # Do not expose backend port publicly — only reachable through nginx
+    ports: []
+
+  frontend:
+    build:
+      args:
+        VITE_API_URL: ${BACKEND_URL}
+    environment:
+      - NODE_ENV=production

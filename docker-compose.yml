@@ -1,0 +1,66 @@
+version: "3.9"
+
+services:
+  # ── MongoDB ─────────────────────────────────────────────────────
+  mongo:
+    image: mongo:7
+    container_name: wedding_mongo
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE: wedding_db
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - wedding_net
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── FastAPI Backend ──────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: wedding_backend
+    restart: unless-stopped
+    env_file: ./backend/.env
+    environment:
+      # Override the MongoDB URL to use the Docker service name
+      MONGODB_URL: mongodb://mongo:27017
+    volumes:
+      # Persist uploaded photos outside the container
+      - uploads_data:/app/uploads
+    ports:
+      - "8000:8000"
+    networks:
+      - wedding_net
+    depends_on:
+      mongo:
+        condition: service_healthy
+
+  # ── React Frontend ───────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        # Bake the API URL into the build
+        VITE_API_URL: http://localhost:8000
+    container_name: wedding_frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    networks:
+      - wedding_net
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:
+  uploads_data:
+
+networks:
+  wedding_net:
+    driver: bridge
